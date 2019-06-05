@@ -1,6 +1,6 @@
 package com.jz.taskmaster;
 
-public class Task {
+public class ProjectTask {
 
     private String title;
 

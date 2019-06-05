@@ -28,26 +28,26 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
             this.textState = itemView.findViewById(R.id.text_state);
         }
 
-        public void setTask(Task task) {
-            this.textTitle.setText(task.getTitle());
-            this.textDescription.setText(task.getDescription());
-            this.textState.setText(task.getState());
+        public void setTask(ProjectTask projectTask) {
+            this.textTitle.setText(projectTask.getTitle());
+            this.textDescription.setText(projectTask.getDescription());
+            this.textState.setText(projectTask.getState());
         }
     }
 
-    private List<Task> tasks;
+    private List<ProjectTask> projectTasks;
 
-    public TaskLayoutAdapter(List<Task> tasks) {
-        this.tasks = tasks;
+    public TaskLayoutAdapter(List<ProjectTask> projectTasks) {
+        this.projectTasks = projectTasks;
     }
 
     public void removeTask(int index) {
-        this.tasks.remove(index);
+        this.projectTasks.remove(index);
         this.notifyItemRemoved(index);
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public void setProjectTasks(ArrayList<ProjectTask> projectTasks) {
+        this.projectTasks = projectTasks;
         this.notifyDataSetChanged();
     }
 
@@ -65,13 +65,13 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
 
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
-        Task task = tasks.get(position);
-        holder.setTask(task);
+        ProjectTask projectTask = projectTasks.get(position);
+        holder.setTask(projectTask);
 
     }
 
     @Override
     public int getItemCount() {
-        return tasks.size();
+        return projectTasks.size();
     }
 }
