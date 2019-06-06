@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TaskMaster</string>
+    <string name="button_add">Add Task</string>
+    <string name="button_get">Get Task</string>
+    <string name="button_login">Login</string>
+    <string name="button_logout">Logout</string>
 </resources>

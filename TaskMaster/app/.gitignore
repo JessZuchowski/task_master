@@ -38,7 +38,7 @@ captures/
 # Intellij
 *.iml
 **/.idea/workspace.xml
-**/.idea/tasks.xml
+**/.idea/projectTasks.xml
 **/.idea/gradle.xml
 **/.idea/dictionaries
 **/.idea/libraries
