@@ -3,6 +3,8 @@ package com.jz.taskmaster;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,8 +25,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +38,12 @@ public class MainActivity extends AppCompatActivity {
    FirebaseFirestore database;
    FirebaseUser user;
 
+   RecyclerView recyclerView;
+   RecyclerView.LayoutManager layoutManager;
+   TaskLayoutAdapter adapter;
+
+   public List<ProjectTask> projectTasks;
+
    private static final int RC_SIGN_IN = 1717;
 
     @Override
@@ -39,9 +51,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get Firestore instance
         database = FirebaseFirestore.getInstance();
+        //set Firestore settings
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build();
+        database.setFirestoreSettings(settings);
+
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         setUI();
+
+        projectTasks = new ArrayList<>();
+
+        RecyclerView recyclerView = findViewById(R.id.task_entry);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new TaskLayoutAdapter(projectTasks);
+        recyclerView.setAdapter(adapter);
     }
 
     public void onLoginClick(View view) {
@@ -54,6 +83,17 @@ public class MainActivity extends AppCompatActivity {
                         .setAvailableProviders(providers)
                         .build(),
                 RC_SIGN_IN);
+    }
+
+    public void onLogoutClick(View view) {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("User", "Logout was Successful");
+                    }
+                });
+        setUI();
     }
 
     private void setUI() {
@@ -100,16 +140,17 @@ public class MainActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("ProjectTask One", "Successfully Added" + documentReference.getId());
+                        Log.d("Task", "Successfully Added" + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("ProjectTask One", "ProjectTask Has Failed", e);
+                        Log.d("Task", "Log Has Failed", e);
                     }
                 });
     }
+
     public void onGetTaskClick(View view) {
         database.collection("projectTasks")
                 .get()
@@ -117,16 +158,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            QuerySnapshot snap = task.getResult();
-                            for (DocumentSnapshot document : snap.getDocuments()) {
-                                Log.d("ProjectTask One", "Id: " + document.getId() + ",Title:" + document.get("title"));
-                                ProjectTask projectTask1 = document.toObject(ProjectTask.class);
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d("Task", document.getId() + " " + document.getData());
                             }
                         }
                         else{
-
+                            Log.w("Task", "Error Getting Task", task.getException());
                         }
                     }
                 });
+    }
+    public void onMyTaskButtonClick(View view) {
+        Intent intent = new Intent(this, TaskActivity.class);
+        startActivity(intent);
     }
 }

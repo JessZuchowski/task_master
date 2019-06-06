@@ -9,3 +9,20 @@ This app will allow users to track tasks on a project.
 3. Users should be able to create a Task with a title, description, and state (Available, Assigned, Accepted, or Finished).
 4. Task data should be persisted with the Cloud Firestore.
 5. Test the ViewAdapter. 
+
+## Day Two Features
+
+1. Users should be able to log in with email and password.
+2. Users should be able to see all tasks in the database.
+3. Users should be able to assign a task to themselves.
+4. The user assigned to a task should be able to accept and mark the task as complete. 
+
+## Day Three Features
+
+1. Users should be able to visit a "My Task" page.
+2. The My Task page should display all current tasks in a RecyclerView.
+3. Users should be able to filter their tasks by "open" and "all". 
+
+## References
+
+<a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a> 

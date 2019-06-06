@@ -4,4 +4,9 @@
     <string name="button_get">Get Task</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
+    <string name="task_title">Task Title</string>
+    <string name="task_description">Task Description</string>
+    <string name="task_state">Task State</string>
+    <string name="button_home">Home</string>
+    <string name="button_mytasks">My Tasks</string>
 </resources>
