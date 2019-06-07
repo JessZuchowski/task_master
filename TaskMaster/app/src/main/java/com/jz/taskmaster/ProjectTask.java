@@ -1,12 +1,17 @@
 package com.jz.taskmaster;
 
+import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
 import java.util.HashSet;
 
+@IgnoreExtraProperties
 public class ProjectTask {
 
     private String title;
     private String description;
     private String state;
+    private String id;
 
     public ProjectTask() {
 
@@ -16,6 +21,7 @@ public class ProjectTask {
         this.title = title;
         this.description = description;
         this.state = state;
+        this.id = id;
     }
 //    private HashSet<Integer> states; ?
     //to be part of state
@@ -23,6 +29,12 @@ public class ProjectTask {
 //    public boolean isAssigned;
 //    public boolean isAccepted;
 //    public boolean isFinished;
+//
+//    @Exclude
+//    public void ProjectTask setId(String id) {
+//        this.id = id;
+//    return this;
+//    }
 
     public String getTitle() {
         return title;
@@ -45,4 +57,5 @@ public class ProjectTask {
         this.state = state;
     }
 
+    public String getId() { return id;}
 }

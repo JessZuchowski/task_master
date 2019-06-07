@@ -60,7 +60,11 @@ public class MainActivity extends AppCompatActivity {
         database.setFirestoreSettings(settings);
 
 
+        //user profile
         user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+        }
         setUI();
 
         projectTasks = new ArrayList<>();
@@ -72,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TaskLayoutAdapter(projectTasks);
         recyclerView.setAdapter(adapter);
     }
+
+    //
 
     public void onLoginClick(View view) {
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -103,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         if (user != null) {
             login.setEnabled(false);
             logout.setEnabled(true);
-            text.setText(user.getDisplayName());
+            text.setText("Home: " + user.getDisplayName());
         }
         else {
             login.setEnabled(true);
@@ -151,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    //onReadClick - add: ProjectTask pt = document.toObject( String id = doc.getId();
     public void onGetTaskClick(View view) {
         database.collection("projectTasks")
                 .get()
@@ -158,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            QuerySnapshot snap = task.getResult();
+                            List<ProjectTask> projectTasks = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d("Task", document.getId() + " " + document.getData());
                             }
@@ -170,6 +179,11 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onMyTaskButtonClick(View view) {
         Intent intent = new Intent(this, TaskActivity.class);
+        startActivity(intent);
+    }
+
+    public void onMyProfileButtonClick(View view) {
+        Intent intent = new Intent(this, MyProfileActivity.class);
         startActivity(intent);
     }
 }

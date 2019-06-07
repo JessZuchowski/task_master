@@ -9,4 +9,7 @@
     <string name="task_state">Task State</string>
     <string name="button_home">Home</string>
     <string name="button_mytasks">My Tasks</string>
+    <string name="button_myprofile">My Profile</string>
+    <string name="text_name">Update Name</string>
+    <string name="text_bio">Update Bio</string>
 </resources>

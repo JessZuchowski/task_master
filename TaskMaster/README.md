@@ -23,6 +23,12 @@ This app will allow users to track tasks on a project.
 2. The My Task page should display all current tasks in a RecyclerView.
 3. Users should be able to filter their tasks by "open" and "all". 
 
+## Day Four Features
+
+1. Users should have a Profile Page. 
+2. On that activity, users should be able to view and edit their username and bio.
+3. On the Task detail activity, clicking on the assigned user should open that user's profile.
+
 ## References
 
 <a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a> 

@@ -1,6 +1,8 @@
 package com.jz.taskmaster;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +30,20 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
             this.textState = itemView.findViewById(R.id.text_state);
         }
 
-        public void setTask(ProjectTask projectTask) {
+        public void setTask(final ProjectTask projectTask) {
             this.textTitle.setText(projectTask.getTitle());
             this.textDescription.setText(projectTask.getDescription());
             this.textState.setText(projectTask.getState());
+
+            this.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = itemView.getContext();
+                    Intent intent = new Intent(context, TaskActivity.class);
+                    intent.putExtra("projectTaskid", projectTask.getId());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 
