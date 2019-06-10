@@ -11,8 +11,18 @@ public class ProjectTask {
     private String title;
     private String description;
     private String state;
+
+    @Exclude
     private String id;
 
+
+//    private HashSet<Integer> states; ?
+    //to be part of state
+//    public boolean isAvailable;
+//    public boolean isAssigned;
+//    public boolean isAccepted;
+//    public boolean isFinished;
+//
     public ProjectTask() {
 
     }
@@ -21,20 +31,14 @@ public class ProjectTask {
         this.title = title;
         this.description = description;
         this.state = state;
-        this.id = id;
     }
-//    private HashSet<Integer> states; ?
-    //to be part of state
-//    public boolean isAvailable;
-//    public boolean isAssigned;
-//    public boolean isAccepted;
-//    public boolean isFinished;
-//
-//    @Exclude
-//    public void ProjectTask setId(String id) {
-//        this.id = id;
-//    return this;
-//    }
+
+
+    public String getId() { return id;}
+    public ProjectTask setId(String id) {
+        this.id = id;
+        return this;
+    }
 
     public String getTitle() {
         return title;
@@ -57,5 +61,4 @@ public class ProjectTask {
         this.state = state;
     }
 
-    public String getId() { return id;}
 }

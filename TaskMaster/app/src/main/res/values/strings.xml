@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">TaskMaster</string>
-    <string name="button_add">Add Task</string>
-    <string name="button_get">Get Task</string>
+    <string name="button_add">Add New Task</string>
+    <string name="button_get">View All Tasks</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
-    <string name="task_state">Task State</string>
+    <string name="task_state">Available/ Assigned/ Accepted/ Complete</string>
     <string name="button_home">Home</string>
-    <string name="button_mytasks">My Tasks</string>
+    <string name="button_mytasks">Go to My Tasks</string>
     <string name="button_myprofile">My Profile</string>
     <string name="text_name">Update Name</string>
     <string name="text_bio">Update Bio</string>

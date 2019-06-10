@@ -8,6 +8,10 @@ import androidx.test.runner.AndroidJUnit4;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,5 +27,17 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.jz.taskmaster", appContext.getPackageName());
+
+        //working on tests
+//        NewAdapter adapter = new NewAdapter(new ArrayList<String>());
+//
+//        assertEquals(0, adapter.getItemCount());
+//
+//        List<String> test = Arrays.asList(
+//                "A", "B", "C"
+//        );
+//        adapter.updateData(test);
+//
+//        assertEquals(3, adapter.getItemCount());
     }
 }

@@ -40,7 +40,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
                 public void onClick(View view) {
                     Context context = itemView.getContext();
                     Intent intent = new Intent(context, TaskActivity.class);
-                    intent.putExtra("projectTaskid", projectTask.getId());
+                    intent.putExtra("projectTaskId", projectTask.getId());
                     context.startActivity(intent);
                 }
             });
@@ -58,7 +58,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
         this.notifyItemRemoved(index);
     }
 
-    public void setProjectTasks(ArrayList<ProjectTask> projectTasks) {
+    public void setProjectTasks(List<ProjectTask> projectTasks) {
         this.projectTasks = projectTasks;
         this.notifyDataSetChanged();
     }
