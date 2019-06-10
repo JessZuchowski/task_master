@@ -6,7 +6,8 @@
     <string name="button_logout">Logout</string>
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
-    <string name="task_state">Available/ Assigned/ Accepted/ Complete</string>
+    <string name="task_state">Open/ Accepted/ Complete</string>
+    <string name="task_assigned">Assigned to:</string>
     <string name="button_home">Home</string>
     <string name="button_mytasks">Go to My Tasks</string>
     <string name="button_myprofile">My Profile</string>

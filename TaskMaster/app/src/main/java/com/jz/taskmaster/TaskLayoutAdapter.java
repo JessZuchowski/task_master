@@ -25,6 +25,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
         public TextView textTitle;
         public TextView textDescription;
         public TextView textState;
+        public TextView textAssign;
 
         FirebaseFirestore database;
 
@@ -34,6 +35,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
             this.textTitle = itemView.findViewById(R.id.text_title);
             this.textDescription = itemView.findViewById(R.id.text_description);
             this.textState = itemView.findViewById(R.id.text_state);
+            this.textAssign = itemView.findViewById(R.id.text_assign);
 
             database = FirebaseFirestore.getInstance();
         }

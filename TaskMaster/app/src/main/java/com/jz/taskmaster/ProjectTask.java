@@ -11,6 +11,7 @@ public class ProjectTask {
     private String title;
     private String description;
     private String state;
+    private String assign;
 
     @Exclude
     private String id;
@@ -27,10 +28,11 @@ public class ProjectTask {
 
     }
 
-    public ProjectTask(String title, String description, String state) {
+    public ProjectTask(String title, String description, String state, String assign) {
         this.title = title;
         this.description = description;
         this.state = state;
+        this.assign = assign;
     }
 
 
@@ -61,4 +63,11 @@ public class ProjectTask {
         this.state = state;
     }
 
+    public String getAssign() {
+        return assign;
+    }
+
+    public void setAssign(String assign) {
+        this.assign = assign;
+    }
 }
