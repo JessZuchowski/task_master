@@ -14,4 +14,5 @@
     <string name="text_name">Update Display Name</string>
     <string name="text_bio">Update Bio</string>
     <string name="button_bio">Update User Info</string>
+    <string name="button_device">Add Device</string>
 </resources>

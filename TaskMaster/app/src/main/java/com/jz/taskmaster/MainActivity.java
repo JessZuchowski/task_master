@@ -30,6 +30,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
     //firebase
     FirebaseFirestore database;
    FirebaseUser user;
+
    Context context;
+    TextView text;
 
    private static final int RC_SIGN_IN = 1717;
 
@@ -198,6 +202,27 @@ public class MainActivity extends AppCompatActivity {
                         else{
                             Log.w("Task", "Error Getting Task", task.getException());
                         }
+                    }
+                });
+    }
+
+    //add device token
+    public void onAddDeviceClick(View view) {
+        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
+
+        instanceId
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if ( !task.isSuccessful()) {
+                            Log.w("NOTIFICATION", ": Failed to get Instance", task.getException());
+                            return;
+                        }
+
+                        String token = task.getResult().getToken();
+                        Log.d("NOTIFICATION", token);
+                        text.setText(token);
                     }
                 });
     }

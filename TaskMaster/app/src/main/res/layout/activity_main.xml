@@ -51,22 +51,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="56dp"
         android:onClick="onLoginClick"
         android:text="@string/button_login"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_myprofile"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="56dp"
         android:onClick="onLogoutClick"
         android:text="@string/button_logout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_device" />
 
     <TextView
         android:id="@+id/text_content"
@@ -148,12 +152,21 @@
         android:id="@+id/button_myprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="56dp"
         android:onClick="onMyProfileButtonClick"
         android:text="@string/button_myprofile"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_logout"
-        app:layout_constraintStart_toEndOf="@+id/button_login" />
+        app:layout_constraintEnd_toStartOf="@+id/button_device" />
+
+    <Button
+        android:id="@+id/button_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="56dp"
+        android:onClick="onAddDeviceClick"
+        android:text="@string/button_device"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_myprofile" />
 </androidx.constraintlayout.widget.ConstraintLayout>
