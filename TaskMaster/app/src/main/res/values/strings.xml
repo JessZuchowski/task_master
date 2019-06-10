@@ -10,6 +10,7 @@
     <string name="button_home">Home</string>
     <string name="button_mytasks">Go to My Tasks</string>
     <string name="button_myprofile">My Profile</string>
-    <string name="text_name">Update Name</string>
+    <string name="text_name">Update Display Name</string>
     <string name="text_bio">Update Bio</string>
+    <string name="button_bio">Update User Info</string>
 </resources>

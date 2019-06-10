@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     //firebase
     FirebaseFirestore database;
    FirebaseUser user;
+   Context context;
 
    private static final int RC_SIGN_IN = 1717;
 
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         database.setFirestoreSettings(settings);
 
+        context = this;
 
         //user profile
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    //log in/ log out
+    //log in
     public void onLoginClick(View view) {
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build()
@@ -99,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 RC_SIGN_IN);
     }
 
+    //log out
     public void onLogoutClick(View view) {
         AuthUI.getInstance()
                 .signOut(this)
@@ -148,11 +152,6 @@ public class MainActivity extends AppCompatActivity {
 
     //add a new task
     public void onAddTaskClick(View view) {
-//        test data:
-//        ProjectTask projectTask1 = new ProjectTask();
-//        projectTask1.setTitle("ProjectTask One");
-//        projectTask1.setDescription("ProjectTask Description");
-//        projectTask1.setState("ProjectTask State");
         title = findViewById(R.id.task_title);
         description = findViewById(R.id.task_description);
         state = findViewById(R.id.task_state);

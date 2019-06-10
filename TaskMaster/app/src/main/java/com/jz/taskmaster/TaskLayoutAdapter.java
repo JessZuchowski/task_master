@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,26 +26,43 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
         public TextView textDescription;
         public TextView textState;
 
+        FirebaseFirestore database;
+
         public TaskHolder (@NonNull View itemView) {
             super (itemView);
 
             this.textTitle = itemView.findViewById(R.id.text_title);
             this.textDescription = itemView.findViewById(R.id.text_description);
             this.textState = itemView.findViewById(R.id.text_state);
+
+            database = FirebaseFirestore.getInstance();
         }
 
+        //set task, on click listener to get task from db by id
         public void setTask(final ProjectTask projectTask) {
             this.textTitle.setText(projectTask.getTitle());
             this.textDescription.setText(projectTask.getDescription());
             this.textState.setText(projectTask.getState());
 
+            final String id = projectTask.getId();
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     Context context = itemView.getContext();
-                    Intent intent = new Intent(context, TaskActivity.class);
+                    Intent intent = new Intent(context, SingleTaskActivity.class);
                     intent.putExtra("projectTaskId", projectTask.getId());
-                    context.startActivity(intent);
+                    itemView.getContext().startActivity(intent);
+
+                    database.collection("projectTasks")
+                            .document(id)
+                            .get()
+                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    ProjectTask singleTask = documentSnapshot.toObject(ProjectTask.class);
+
+                                }
+                            });
                 }
             });
         }

@@ -29,6 +29,13 @@ This app will allow users to track tasks on a project.
 2. On that activity, users should be able to view and edit their username and bio.
 3. On the Task detail activity, clicking on the assigned user should open that user's profile.
 
+## Day Five Features
+
+1. User's device tokens should be saved in their profile.
+2. The notifications composer should be able to send notifications to all devices with the app.
+
 ## References
 
-<a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a> 
+<a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a>
+
+<a href="https://github.com/codefellows/seattle-java-401d3">Java 401 Class Demos</a> 
