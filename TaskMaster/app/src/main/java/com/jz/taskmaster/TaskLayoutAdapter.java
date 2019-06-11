@@ -44,7 +44,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
         public void setTask(final ProjectTask projectTask) {
             this.textTitle.setText(projectTask.getTitle());
             this.textDescription.setText(projectTask.getDescription());
-            this.textState.setText(projectTask.getState());
+
 
             final String id = projectTask.getId();
             this.itemView.setOnClickListener(new View.OnClickListener() {

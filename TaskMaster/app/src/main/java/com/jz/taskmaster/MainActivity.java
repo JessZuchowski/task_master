@@ -26,8 +26,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -55,11 +58,6 @@ public class MainActivity extends AppCompatActivity {
    TaskLayoutAdapter adapter;
    public List<ProjectTask> projectTasks;
 
-   //add tasks
-    EditText title;
-    EditText description;
-    EditText state;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +79,22 @@ public class MainActivity extends AppCompatActivity {
             String uid = user.getUid();
         }
         setUI();
+
+        //notification listener
+        ListenerRegistration registration = database.collection("projectTasks")
+                //.whereEqualTo("title", "userId") ???
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                        for (DocumentSnapshot snap : queryDocumentSnapshots.getDocuments()) {
+                            if (snap.exists()) {
+                                ProjectTask projectTask = snap.toObject(ProjectTask.class);
+                                //text.setText()(projectTask.getWhateverJavaScriptFunction());
+                                System.out.println(snap.getId());
+                            }
+                        }
+                    }
+                });
 
         //recylcer view
         projectTasks = new ArrayList<>();
@@ -154,33 +168,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //add a new task
-    public void onAddTaskClick(View view) {
-        title = findViewById(R.id.task_title);
-        description = findViewById(R.id.task_description);
-        state = findViewById(R.id.task_state);
-
-        ProjectTask projectTask = new ProjectTask();
-        projectTask.setTitle(title.getText().toString());
-        projectTask.setDescription(description.getText().toString());
-        projectTask.setState(state.getText().toString());
-
-        database.collection("projectTasks")
-                .add(projectTask)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Task", "Successfully Added" + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("Task", "Log Has Failed", e);
-                    }
-                });
-    }
-
     //get all tasks from database
     public void onGetTaskClick(View view) {
         database.collection("projectTasks")
@@ -234,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMyProfileButtonClick(View view) {
         Intent intent = new Intent(this, MyProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void onAddTaskClick(View view) {
+        Intent intent = new Intent(this, AddTaskActivity.class);
         startActivity(intent);
     }
 }

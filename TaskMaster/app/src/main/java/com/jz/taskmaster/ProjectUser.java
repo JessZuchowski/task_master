@@ -1,7 +1,9 @@
 package com.jz.taskmaster;
 
 import com.google.firebase.firestore.Exclude;
+import com.google.firebase.firestore.IgnoreExtraProperties;
 
+@IgnoreExtraProperties
 public class ProjectUser {
 
     private String displayName;
@@ -19,9 +21,11 @@ public class ProjectUser {
         this.bio = bio;
     }
 
+    @Exclude
     public String getuserId() {
         return userId;
     }
+    @Exclude
     public ProjectUser setUserId(String userId) {
         this.userId = userId;
         return this;

@@ -34,8 +34,17 @@ This app will allow users to track tasks on a project.
 1. User's device tokens should be saved in their profile.
 2. The notifications composer should be able to send notifications to all devices with the app.
 
+## Day Six Features
+
+1. Add notification to users when a task's state is updated.
+2. Everyone who has interacted with that task should be notified. 
+3. The notification should include the task title and state. 
+4. Tapping the notification should take the user to that task's detail page. 
+
 ## References
 
 <a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a>
 
 <a href="https://github.com/codefellows/seattle-java-401d3">Java 401 Class Demos</a> 
+
+<a href="https://developer.android.com/topic/libraries/data-binding/observability#samples">Android Dev Guide</a>
