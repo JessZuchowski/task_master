@@ -41,6 +41,15 @@ This app will allow users to track tasks on a project.
 3. The notification should include the task title and state. 
 4. Tapping the notification should take the user to that task's detail page. 
 
+## Day Seven Features
+
+1. Ensure the app is accessible to all users. 
+2. Test using TalkBack and the Accessibility Scanner.
+3. Enable AccessibilityChecks on Espresso tests.
+4. Share Results of Scanner test:
+
+![accessibility scan results](app/src/screenshots/Accessibility_Scanner_Results.png) 
+
 ## References
 
 <a href="https://firebase.google.com/docs/firestore/quickstart">Cloud Firestore Docs</a>
