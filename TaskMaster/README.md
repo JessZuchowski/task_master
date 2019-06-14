@@ -56,4 +56,6 @@ This app will allow users to track tasks on a project.
 
 <a href="https://github.com/codefellows/seattle-java-401d3">Java 401 Class Demos</a> 
 
+<a href="https://firebase.google.com/docs/functions/get-started">Firebase Function Docs</a>
+
 <a href="https://developer.android.com/topic/libraries/data-binding/observability#samples">Android Dev Guide</a>

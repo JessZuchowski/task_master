@@ -11,13 +11,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 public class MyProfileActivity extends AppCompatActivity {
 
@@ -72,6 +76,22 @@ public class MyProfileActivity extends AppCompatActivity {
         }
     }
 
+    // TODO: move add device to profile update from main activity
+//    public void addDeviceId() {
+//        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
+//        instanceId.getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("");
+//                    return;
+//                }
+//                token = task.getResult().getToken();
+//            }
+//        });
+//    }
+
+
     //add new user info
     public void onAddBioClick(View view) {
         displayName = findViewById(R.id.text_name);
@@ -80,6 +100,8 @@ public class MyProfileActivity extends AppCompatActivity {
         ProjectUser projectUser = new ProjectUser();
         projectUser.setDisplayName(displayName.getText().toString());
         projectUser.setBio(bio.getText().toString());
+
+
 
         database.collection("projectUsers")
                 .add(projectUser)

@@ -3,11 +3,14 @@ package com.jz.taskmaster;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.util.List;
+
 @IgnoreExtraProperties
 public class ProjectUser {
 
     private String displayName;
     private String bio;
+    private List<String> deviceIds;
 
     @Exclude
     private String userId;
@@ -16,9 +19,10 @@ public class ProjectUser {
 
     }
 
-    public ProjectUser(String displayName, String bio) {
+    public ProjectUser(String displayName, String bio, List<String> deviceIds) {
         this.displayName = displayName;
         this.bio = bio;
+        this.deviceIds = deviceIds;
     }
 
     @Exclude
@@ -43,5 +47,13 @@ public class ProjectUser {
     }
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<String> getDeviceIds() {
+        return deviceIds;
+    }
+
+    public void setDeviceIds(List<String> deviceIds) {
+        this.deviceIds = deviceIds;
     }
 }
