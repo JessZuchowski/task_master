@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
@@ -24,27 +26,37 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.ListenerRegistration;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-   FirebaseFirestore database;
+    //firebase
+    FirebaseFirestore database;
    FirebaseUser user;
 
+   Context context;
+    TextView text;
+
+   private static final int RC_SIGN_IN = 1717;
+
+   //recycler view
    RecyclerView recyclerView;
    RecyclerView.LayoutManager layoutManager;
    TaskLayoutAdapter adapter;
-
    public List<ProjectTask> projectTasks;
-
-   private static final int RC_SIGN_IN = 1717;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         database.setFirestoreSettings(settings);
 
+        context = this;
 
         //user profile
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -67,6 +80,23 @@ public class MainActivity extends AppCompatActivity {
         }
         setUI();
 
+        //notification listener
+        ListenerRegistration registration = database.collection("projectTasks")
+                //.whereEqualTo("title", "userId") ???
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                        for (DocumentSnapshot snap : queryDocumentSnapshots.getDocuments()) {
+                            if (snap.exists()) {
+                                ProjectTask projectTask = snap.toObject(ProjectTask.class);
+                                //text.setText()(projectTask.getWhateverJavaScriptFunction());
+                                System.out.println(snap.getId());
+                            }
+                        }
+                    }
+                });
+
+        //recylcer view
         projectTasks = new ArrayList<>();
 
         RecyclerView recyclerView = findViewById(R.id.task_entry);
@@ -77,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    //
-
+    //log in
     public void onLoginClick(View view) {
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build()
@@ -91,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 RC_SIGN_IN);
     }
 
+    //log out
     public void onLogoutClick(View view) {
         AuthUI.getInstance()
                 .signOut(this)
@@ -102,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         setUI();
     }
 
+    //user interface
     private void setUI() {
         Button login = findViewById(R.id.button_login);
         Button logout = findViewById(R.id.button_logout);
@@ -118,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //firebase request/response
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == RC_SIGN_IN) {
@@ -126,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 user = FirebaseAuth.getInstance().getCurrentUser();
+                assert user != null;
                 Log.d("MAINACTIVITY", "user" + user.getEmail());
             }
             else {
@@ -135,29 +168,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onAddTaskClick(View view) {
-        ProjectTask projectTask1 = new ProjectTask();
-        projectTask1.setTitle("ProjectTask One");
-        projectTask1.setDescription("ProjectTask Description");
-        projectTask1.setState("ProjectTask State");
-
-        database.collection("projectTasks")
-                .add(projectTask1)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("Task", "Successfully Added" + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("Task", "Log Has Failed", e);
-                    }
-                });
-    }
-
-    //onReadClick - add: ProjectTask pt = document.toObject( String id = doc.getId();
+    //get all tasks from database
     public void onGetTaskClick(View view) {
         database.collection("projectTasks")
                 .get()
@@ -167,9 +178,13 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             QuerySnapshot snap = task.getResult();
                             List<ProjectTask> projectTasks = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
+                            for (DocumentSnapshot document : snap.getDocuments()) {
                                 Log.d("Task", document.getId() + " " + document.getData());
+                                ProjectTask pt = document.toObject(ProjectTask.class);
+                                pt.setId(document.getId());
+                                projectTasks.add(pt);
                             }
+                            adapter.setProjectTasks(projectTasks);
                         }
                         else{
                             Log.w("Task", "Error Getting Task", task.getException());
@@ -177,6 +192,28 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    //add device token
+    public void onAddDeviceClick(View view) {
+        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
+
+        instanceId
+                .getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if ( !task.isSuccessful()) {
+                            Log.w("NOTIFICATION", ": Failed to get Instance", task.getException());
+                            return;
+                        }
+
+                        String token = task.getResult().getToken();
+                        Log.d("NOTIFICATION", token);
+                        text.setText(token);
+                    }
+                });
+    }
+
     public void onMyTaskButtonClick(View view) {
         Intent intent = new Intent(this, TaskActivity.class);
         startActivity(intent);
@@ -184,6 +221,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void onMyProfileButtonClick(View view) {
         Intent intent = new Intent(this, MyProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void onAddTaskClick(View view) {
+        Intent intent = new Intent(this, AddTaskActivity.class);
         startActivity(intent);
     }
 }

@@ -11,37 +11,37 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
-public class MyProfileActivity extends AppCompatActivity {
+public class AddTaskActivity extends AppCompatActivity {
 
     //firebase
     FirebaseFirestore database;
     FirebaseUser user;
     Context context;
 
-    //add user info
-    EditText displayName;
-    EditText bio;
+    //add tasks
+    EditText title;
+    EditText description;
+    EditText available;
+    EditText assigned;
+    EditText accepted;
+    EditText accomplished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
+        setContentView(R.layout.activity_add_task);
 
-        //get firestore instance
+        //get Firestore instance
         database = FirebaseFirestore.getInstance();
-        //set firestore settings
+        //set Firestore settings
         FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder()
                 .setPersistenceEnabled(true)
                 .build();
@@ -57,65 +57,55 @@ public class MyProfileActivity extends AppCompatActivity {
         setUI();
     }
 
-    public void onHomeButtonClick(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     //display user info
     private void setUI() {
         TextView text1 = findViewById(R.id.text_content);
         TextView text2 = findViewById(R.id.text_content2);
         if (user != null) {
-            text1.setText("My Profile: " + user.getDisplayName());
-            text2.setText(user.getEmail());
+            text1.setText("Add Tasks: " + user.getDisplayName());
         }
         else {
             text1.setText("");
-            text2.setText("");
         }
     }
 
-    // TODO: move add device to profile update from main activity
-//    public void addDeviceId() {
-//        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
-//        instanceId.getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("");
-//                    return;
-//                }
-//                token = task.getResult().getToken();
-//            }
-//        });
-//    }
+    //add a new task
+    public void onCreateTaskClick(View view) {
+        title = findViewById(R.id.task_title);
+        description = findViewById(R.id.task_description);
+        available = findViewById(R.id.task_available);
+        assigned = findViewById(R.id.task_assigned);
+        accepted = findViewById(R.id.task_accepted);
+        accomplished = findViewById(R.id.task_accomplished);
 
 
-    //add new user info
-    public void onAddBioClick(View view) {
-        displayName = findViewById(R.id.text_name);
-        bio = findViewById(R.id.text_bio);
-
-        ProjectUser projectUser = new ProjectUser();
-        projectUser.setDisplayName(displayName.getText().toString());
-        projectUser.setBio(bio.getText().toString());
-
+        ProjectTask projectTask = new ProjectTask();
+        projectTask.setTitle(title.getText().toString());
+        projectTask.setDescription(description.getText().toString());
+//        projectTask.available.get();
+//        projectTask.assigned.get();
+//        projectTask.accepted.get();
+//        projectTask.accomplished.get();
 
 
-        database.collection("projectUsers")
-                .add(projectUser)
+        database.collection("projectTasks")
+                .add(projectTask)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("User Info", "Successfully Added" + documentReference.getId());
+                        Log.d("Task", "Successfully Added" + documentReference.getId());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.d("User Info", "Update Had Failed", e);
+                        Log.d("Task", "Log Has Failed", e);
                     }
                 });
+    }
+
+    public void onHomeButtonClick(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
