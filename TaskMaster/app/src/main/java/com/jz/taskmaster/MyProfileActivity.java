@@ -28,6 +28,8 @@ public class MyProfileActivity extends AppCompatActivity {
     //firebase
     FirebaseFirestore database;
     FirebaseUser user;
+    String userId;
+    String token;
     Context context;
 
     //add user info
@@ -54,7 +56,13 @@ public class MyProfileActivity extends AppCompatActivity {
         if (user != null) {
             String uid = user.getUid();
         }
+
+        userId = user.getUid();
         setUI();
+        displayName = findViewById(R.id.text_name);
+        bio = findViewById(R.id.text_bio);
+
+        findDeviceId();
     }
 
     public void onHomeButtonClick(View view) {
@@ -76,45 +84,39 @@ public class MyProfileActivity extends AppCompatActivity {
         }
     }
 
-    // TODO: move add device to profile update from main activity
-//    public void addDeviceId() {
-//        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
-//        instanceId.getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-//                if (!task.isSuccessful()) {
-//                    Log.e("");
-//                    return;
-//                }
-//                token = task.getResult().getToken();
-//            }
-//        });
-//    }
+    public void findDeviceId() {
+        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
+        instanceId.getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("ProfileActivity", "was unsuccessful");
+                    return;
+                }
+                token = task.getResult().getToken();
+            }
+        });
+    }
 
 
     //add new user info
     public void onAddBioClick(View view) {
-        displayName = findViewById(R.id.text_name);
-        bio = findViewById(R.id.text_bio);
 
         ProjectUser projectUser = new ProjectUser();
         projectUser.setDisplayName(displayName.getText().toString());
         projectUser.setBio(bio.getText().toString());
-
-
+        projectUser.getDeviceIds().add(token);
 
         database.collection("projectUsers")
-                .add(projectUser)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(userId)
+                .set(projectUser)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d("User Info", "Successfully Added" + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("User Info", "Update Had Failed", e);
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (!task.isSuccessful()) {
+                            Log.e("ProfileActivity", "was unsuccessful");
+                            return;
+                        }
                     }
                 });
     }

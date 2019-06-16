@@ -19,4 +19,5 @@
     <string name="button_bio">Update User Info</string>
     <string name="button_device">Add Device</string>
     <string name="button_create_task">Add Task</string>
+    <string name="button_view_all">View All Tasks</string>
 </resources>

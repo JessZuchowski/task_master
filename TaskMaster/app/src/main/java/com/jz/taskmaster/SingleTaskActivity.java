@@ -48,7 +48,7 @@ public class SingleTaskActivity extends AppCompatActivity {
 
         //id from database
         Intent intent = getIntent();
-        String projectTaskId = intent.getStringExtra("projectTaskId");
+        projectTaskId = intent.getStringExtra("projectTaskId");
 
         this.title = findViewById(R.id.single_task_title);
         this.description = findViewById(R.id.single_task_description);
@@ -65,11 +65,6 @@ public class SingleTaskActivity extends AppCompatActivity {
         else {
             text.setText("");
         }
-    }
-
-    //TODO - get single task from db by id
-    public void viewSingleTask() {
-
     }
 
     public void onHomeButtonClick(View view) {

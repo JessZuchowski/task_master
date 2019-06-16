@@ -1,11 +1,29 @@
 const functions = require('firebase-functions');
 
+const admin = require("firebase-admin");
+admin.initializeApp;
+
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
+
+const payload = {
+    notification: {
+    title: "NOTIFICATION",
+    body: "USER NOTIFICATION"
+    }
+};
+
+return admin
+.firestore()
+.collection("projectUsers")
+.get()
+.then(projectUsers => {
+    const devices = projectUsers.map(projectUser.data().deviceId);
+});
 
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');

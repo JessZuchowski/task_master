@@ -3,6 +3,7 @@ package com.jz.taskmaster;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @IgnoreExtraProperties
@@ -10,7 +11,7 @@ public class ProjectUser {
 
     private String displayName;
     private String bio;
-    private List<String> deviceIds;
+    private List<String> deviceIds = new ArrayList<>();
 
     @Exclude
     private String userId;
@@ -26,7 +27,8 @@ public class ProjectUser {
     }
 
     @Exclude
-    public String getuserId() {
+    public String getUserId() {
+
         return userId;
     }
     @Exclude
@@ -36,16 +38,20 @@ public class ProjectUser {
     }
 
     public String getDisplayName() {
+
         return displayName;
     }
     public void setDisplayName(String displayName) {
+
         this.displayName = displayName;
     }
 
     public String getBio() {
+
         return bio;
     }
     public void setBio(String bio) {
+
         this.bio = bio;
     }
 

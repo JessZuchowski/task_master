@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".TaskActivity">
+    tools:context=".MyTaskActivity">
 
     <TextView
         android:id="@+id/text_content"
@@ -22,8 +22,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/task_entry"
-        android:layout_width="395dp"
-        android:layout_height="478dp"
+        android:layout_width="0dp"
+        android:layout_height="390dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -36,17 +36,30 @@
         android:id="@+id/button_home"
         android:layout_width="wrap_content"
         android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="44dp"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="60dp"
         android:onClick="onHomeButtonClick"
         android:text="@string/button_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_view_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onViewAllTasksClick"
+        android:text="@string/button_view_all"
+        app:layout_constraintBottom_toTopOf="@+id/button_home"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_entry" />
 </androidx.constraintlayout.widget.ConstraintLayout>

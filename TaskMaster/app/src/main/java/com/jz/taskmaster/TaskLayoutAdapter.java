@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 
@@ -24,8 +26,10 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
     public static class TaskHolder extends RecyclerView.ViewHolder {
         public TextView textTitle;
         public TextView textDescription;
-        public TextView textState;
-        public TextView textAssign;
+        public TextView textAvailable;
+        public TextView textAssigned;
+        public TextView textAccepted;
+        public  TextView textAccomplished;
 
         FirebaseFirestore database;
 
@@ -34,37 +38,34 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
 
             this.textTitle = itemView.findViewById(R.id.text_title);
             this.textDescription = itemView.findViewById(R.id.text_description);
-            this.textState = itemView.findViewById(R.id.text_state);
-            this.textAssign = itemView.findViewById(R.id.text_assign);
+            this.textAvailable = itemView.findViewById(R.id.text_available);
+            this.textAssigned = itemView.findViewById(R.id.text_assigned);
+            this.textAccepted = itemView.findViewById(R.id.text_accepted);
+            this.textAccomplished = itemView.findViewById(R.id.text_accomplished);
 
             database = FirebaseFirestore.getInstance();
         }
 
         //set task, on click listener to get task from db by id
-        public void setTask(final ProjectTask projectTask) {
+        public void setProjectTask(final ProjectTask projectTask) {
             this.textTitle.setText(projectTask.getTitle());
             this.textDescription.setText(projectTask.getDescription());
+            this.textAvailable.setText(projectTask.getAvailable());
+            this.textAssigned.setText(projectTask.getAssigned());
+            this.textAccepted.setText(projectTask.getAccepted());
+            this.textAccomplished.setText(projectTask.getAccomplished());
 
 
-            final String id = projectTask.getId();
+            final String projectTaskId = projectTask.getProjectTaskId();
             this.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
+
                     Context context = itemView.getContext();
                     Intent intent = new Intent(context, SingleTaskActivity.class);
-                    intent.putExtra("projectTaskId", projectTask.getId());
-                    itemView.getContext().startActivity(intent);
+                    intent.putExtra("projectTaskId", projectTask.getProjectTaskId());
+                    context.startActivity(intent);
 
-                    database.collection("projectTasks")
-                            .document(id)
-                            .get()
-                            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                @Override
-                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                    ProjectTask singleTask = documentSnapshot.toObject(ProjectTask.class);
-
-                                }
-                            });
                 }
             });
         }
@@ -101,7 +102,7 @@ public class TaskLayoutAdapter extends RecyclerView.Adapter<TaskLayoutAdapter.Ta
     @Override
     public void onBindViewHolder(@NonNull TaskHolder holder, int position) {
         ProjectTask projectTask = projectTasks.get(position);
-        holder.setTask(projectTask);
+        holder.setProjectTask(projectTask);
 
     }
 

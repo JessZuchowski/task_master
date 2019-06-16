@@ -60,7 +60,6 @@ public class AddTaskActivity extends AppCompatActivity {
     //display user info
     private void setUI() {
         TextView text1 = findViewById(R.id.text_content);
-        TextView text2 = findViewById(R.id.text_content2);
         if (user != null) {
             text1.setText("Add Tasks: " + user.getDisplayName());
         }
@@ -80,12 +79,12 @@ public class AddTaskActivity extends AppCompatActivity {
 
 
         ProjectTask projectTask = new ProjectTask();
-        projectTask.setTitle(title.getText().toString());
-        projectTask.setDescription(description.getText().toString());
-//        projectTask.available.get();
-//        projectTask.assigned.get();
-//        projectTask.accepted.get();
-//        projectTask.accomplished.get();
+        projectTask.setTitle("Title: " + title.getText().toString());
+        projectTask.setDescription("Description: " + description.getText().toString());
+        projectTask.setAvailable("Available? " + available.getText().toString());
+        projectTask.setAssigned("Assigned? " + assigned.getText().toString());
+        projectTask.setAccepted("Accepted? " + accepted.getText().toString());
+        projectTask.setAccomplished("Accomplished? " + accomplished.getText().toString());
 
 
         database.collection("projectTasks")

@@ -12,34 +12,25 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
-import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -169,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //get all tasks from database
-    public void onGetTaskClick(View view) {
+    public void onViewAllTasksClick(View view) {
         database.collection("projectTasks")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -181,41 +172,22 @@ public class MainActivity extends AppCompatActivity {
                             for (DocumentSnapshot document : snap.getDocuments()) {
                                 Log.d("Task", document.getId() + " " + document.getData());
                                 ProjectTask pt = document.toObject(ProjectTask.class);
-                                pt.setId(document.getId());
+
+                                pt.withProjectTaskId(document.getId());
+                                String projectTaskId = document.getId();
                                 projectTasks.add(pt);
                             }
                             adapter.setProjectTasks(projectTasks);
                         }
                         else{
-                            Log.w("Task", "Error Getting Task", task.getException());
+                            Log.w("Task", "Error Getting Tasks", task.getException());
                         }
-                    }
-                });
-    }
-
-    //add device token
-    public void onAddDeviceClick(View view) {
-        FirebaseInstanceId instanceId = FirebaseInstanceId.getInstance();
-
-        instanceId
-                .getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if ( !task.isSuccessful()) {
-                            Log.w("NOTIFICATION", ": Failed to get Instance", task.getException());
-                            return;
-                        }
-
-                        String token = task.getResult().getToken();
-                        Log.d("NOTIFICATION", token);
-                        text.setText(token);
                     }
                 });
     }
 
     public void onMyTaskButtonClick(View view) {
-        Intent intent = new Intent(this, TaskActivity.class);
+        Intent intent = new Intent(this, MyTaskActivity.class);
         startActivity(intent);
     }
 
