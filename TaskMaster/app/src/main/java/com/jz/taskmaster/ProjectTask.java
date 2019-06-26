@@ -13,34 +13,31 @@ public class ProjectTask {
 
     private String title;
     private String description;
-    public ObservableBoolean available;
-    public ObservableBoolean assigned;
-    public ObservableBoolean accepted;
-    public ObservableBoolean accomplished;
+    private String available;
+    private String assigned;
+    private String accepted;
+    private String accomplished;
+
 
     @Exclude
-    private String id;
+    private String projectTaskId;
 
     public ProjectTask() {
 
     }
 
-    public ProjectTask(String title, String description, ObservableBoolean available, ObservableBoolean assigned, ObservableBoolean accepted, ObservableBoolean accomplished) {
+    public ProjectTask(String title, String description) {
         this.title = title;
         this.description = description;
-        this.available = available;
-        this.assigned = assigned;
-        this.accepted = accepted;
-        this.accomplished = accomplished;
-
     }
 
 
     @Exclude
-    public String getId() { return id;}
+    public String getProjectTaskId() { return projectTaskId;}
+
     @Exclude
-    public ProjectTask setId(String id) {
-        this.id = id;
+    public ProjectTask withProjectTaskId(String projectTaskId) {
+        this.projectTaskId = projectTaskId;
         return this;
     }
 
@@ -58,36 +55,35 @@ public class ProjectTask {
         this.description = description;
     }
 
-    public ObservableBoolean getAvailable() {
+    public String getAvailable() {
         return available;
     }
 
-    public void setAvailable(ObservableBoolean available) {
+    public void setAvailable(String available) {
         this.available = available;
     }
 
-    public ObservableBoolean getAssigned() {
+    public String getAssigned() {
         return assigned;
     }
 
-    public void setAssigned(ObservableBoolean assigned) {
+    public void setAssigned(String assigned) {
         this.assigned = assigned;
     }
 
-    public ObservableBoolean getAccepted() {
+    public String getAccepted() {
         return accepted;
     }
 
-    public void setAccepted(ObservableBoolean accepted) {
+    public void setAccepted(String accepted) {
         this.accepted = accepted;
     }
 
-    public ObservableBoolean getAccomplished() {
+    public String getAccomplished() {
         return accomplished;
     }
 
-    public void setAccomplished(ObservableBoolean accomplished) {
+    public void setAccomplished(String accomplished) {
         this.accomplished = accomplished;
     }
-
 }

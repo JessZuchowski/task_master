@@ -21,18 +21,36 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/text_state"
+        android:id="@+id/text_available"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:layout_height="wrap_content" />
+        android:text="@string/task_available" />
 
     <TextView
-        android:id="@+id/text_assign"
+        android:id="@+id/text_assigned"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        android:layout_height="wrap_content" />
+        android:text="@string/task_assigned" />
+
+    <TextView
+        android:id="@+id/text_accepted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:text="@string/task_accepted" />
+
+    <TextView
+        android:id="@+id/text_accomplished"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        android:text="@string/task_accomplished" />
 
     <TextView
         android:id="@+id/text_blank"

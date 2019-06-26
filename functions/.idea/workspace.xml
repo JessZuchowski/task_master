@@ -2,21 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc244d4d-1193-4ce6-9c6a-40d4d42d4d2f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.firebaserc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../firebase.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/functions.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskMaster/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/AddTaskActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/AddTaskActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/MyProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/MyProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/ProjectTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/ProjectTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/ProjectUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/ProjectUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/SingleTaskActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/SingleTaskActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/TaskActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/MyTaskActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/TaskLayoutAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/java/com/jz/taskmaster/TaskLayoutAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/activity_task.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/activity_my_task.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/task_view.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/layout/task_view.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../TaskMaster/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,20 +31,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
+            <state relative-caret-position="230">
               <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="522">
-              <caret line="240" column="20" selection-start-line="240" selection-start-column="20" selection-end-line="240" selection-end-column="20" />
+              <caret line="240" column="17" selection-start-line="240" selection-start-column="17" selection-end-line="240" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -70,8 +72,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/index.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/index.js" />
       </list>
     </option>
   </component>
@@ -84,10 +86,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="926" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="816" />
     <option name="y" value="13" />
-    <option name="width" value="988" />
+    <option name="width" value="1098" />
     <option name="height" value="1012" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -140,7 +142,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="741" y="11" width="790" height="809" extended-state="0" />
+    <frame x="653" y="11" width="878" height="809" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -149,7 +151,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Learn" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24520548" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21882641" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -172,13 +174,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -188,7 +183,14 @@
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
-          <caret line="240" column="20" selection-start-line="240" selection-start-column="20" selection-end-line="240" selection-end-column="20" />
+          <caret line="240" column="17" selection-start-line="240" selection-start-column="17" selection-end-line="240" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
         </state>
       </provider>
     </entry>
